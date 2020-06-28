@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div id="login-box">
+    <div class="left">
+        <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <h1><a routerLink="/user/signup" class="signup">Sign up</a></h1>
+         <h1><a routerLink="/user/login" class="notactive">Login</a></h1>
+        <div class="form-group">
+                <input type="text" formControlName="username" placeholder="Username" />
+                <div *ngIf="registrationForm.get('username').invalid && registrationForm.get('username').touched">
+                    <span *ngIf="registrationForm.get('username').errors?.required"><small class="text-danger">username can not be empty.</small></span>
+                    <span *ngIf="registrationForm.get('username').errors?.minlength"><small class="text-danger">username must be at least 3 character.</small></span>
+                    <span *ngIf="registrationForm.get('username').errors?.maxlength"><small class="text-danger">username can not greater than 10 character.</small></span>
+                </div>
+        </div>
+        <div class="form-group">
+            <input type="text" formControlName="email" placeholder="E-mail" />
+            <span *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched"><small class="text-danger">Email id can not be empty</small></span>
+        </div>
+        <div class="form-group">
+            <input type="text" formControlName="Birthday" placeholder="Date of Birth" />
+            <span *ngIf="registrationForm.get('Birthday').invalid && registrationForm.get('Birthday').touched"><small class="text-danger">Date of Birth can not be empty</small></span>
+        </div>
+        <div class="form-group">
+            <input type="password" formControlName="password" placeholder="Password" />
+                <div *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
+                <span *ngIf="registrationForm.get('password').errors?.minlength"><small class="text-danger">password must be atleast 5 character.</small></span>
+                <span *ngIf="registrationForm.get('password').errors?.required"><small class="text-danger">password can not be empty.</small></span>                       
+                </div>
+        </div>
+        <div class="form-group">
+            <input type="password" formControlName="confirmpassword" placeholder="Retype password" />
+            <span *ngIf="registrationForm.get('confirmpassword').invalid && registrationForm.get('confirmpassword').touched"><small class="text-danger">confirmpassword can not be empty.</small></span>                    
+        </div>
+        <div class="form-group">
+            <button  class='btn btn-info' [disabled]="!registrationForm.valid" type="submit" >SIGN ME UP</button>
+        </div>
+        </form>
+    </div>
+    
+    <div class="right">
+      <span class="loginwith">Sign in with<br />social network</span>
+      
+      <button class="social-signin facebook">Log in with facebook</button>
+      <button class="social-signin twitter">Log in with Twitter</button>
+      <button class="social-signin google" (click)="googleOuth()">Log in with Google+</button>
+    </div>
+    <div class="or">OR</div>
+  </div>

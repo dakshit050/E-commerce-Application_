@@ -1,0 +1,124 @@
+<div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0"><a routerLink="/home" routerLinkActivate="active">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Cart</strong></div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="CartData.Total!==0;then thenBlock;else elseBlock"></div>>
+  <ng-template #thenBlock>
+  <div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+          <div class="site-blocks-table">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="product-thumbnail">Image</th>
+                  <th class="product-name">Product</th>
+                  <th class="product-price">Price</th>
+                  <th class="product-quantity">Quantity</th>
+                  <th class="product-quantity">cost</th>
+                  <th class="product-remove">Remove</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of CartData.Product; let i=index">
+                  <td class="product-thumbnail">
+                    <img  class="img-fluid" [src]="p.Data.image" alt="{{p.Data.name}}">
+                  </td>
+                  <td class="product-name">
+                    <h2 class="h5 text-black">{{p.Data.title}}</h2>
+                  </td>
+                  <td class="h5 text-black">{{p.Data.price |currency:'USD'}}</td>
+                  <td>
+                    <div class="input-group mb-3" style="max-width: 120px;">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-primary js-btn-minus" type="button" (click)="cartService.UpdateCart(i,false)">-</button>
+                      </div>
+                      <div type="text" class="form-control text-center">{{p.quantity}}</div>
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-primary js-btn-plus" type="button"(click)="cartService.UpdateCart(i,true)">+</button>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="product-price">
+                    <h2 class="h5 text-black">{{cartService.SubTotal(i) | currency:'USD'}}</h2>
+                  </td>
+                  <td><button class="btn btn-primary btn-sm" (click)="cartService.DeleteProduct(i)">x</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-6 mb-3 mb-md-0">
+             <a routerLink="/product" routerLinkActive="active"> <button class="btn btn-primary btn-sm btn-block">Update Cart</button></a>
+            </div>
+            <div class="col-md-6">
+            <a routerLink="/product" routerLinkActive="active"><button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button></a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label class="text-black h4" for="coupon">Coupon</label>
+              <p>Enter your coupon code if you have one.</p>
+            </div>
+            <div class="col-md-8 mb-3 mb-md-0">
+              <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary btn-sm">Apply Coupon</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pl-5">
+          <div class="row justify-content-end">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-12 text-right border-bottom mb-5">
+                  <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <span class="text-black">Subtotal</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">{{CartData.Total| currency:'USD'}}</strong>
+                </div>
+              </div>
+              <div class="row mb-5">
+                <div class="col-md-6">
+                  <span class="text-black">Total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">{{CartData.Total | currency:'USD'}}</strong>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <button class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  </div>
+</ng-template>
+<ng-template #elseBlock>
+  <h4 style="text-align:center;">Your Cart Is Empty!</h4>
+  <div style="text-align:center;margin-top:10px;">
+    <a routerLink="/product" routerLinkActive="active">  <button class="btn btn-primary">Shop Now</button></a>
+  </div>
+</ng-template>
+
+

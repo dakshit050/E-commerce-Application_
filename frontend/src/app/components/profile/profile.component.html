@@ -1,0 +1,33 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<div class="container">
+    <div class="row">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img [src]="userdetails.photoUrl" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4 >{{userdetails.username}}</h4>
+                        <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                        </i></cite></small>
+                        <p>
+                            <i class="textprofile"></i>
+                            {{userdetails.email}}
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>{{userdetails.DOB}}</p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger" (click)="onsubmit()">
+                                Logout</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

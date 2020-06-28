@@ -1,0 +1,41 @@
+.image-resize{
+    height: 168px;
+    object-fit: cover;
+}
+.paging{
+    align-items: center;
+    padding-right: 220px;
+    margin-top: 167px;
+}
+.searchbar{
+    border-top-style: unset;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: cornflowerblue;
+    animation-delay: 1s;
+}
+ .searchbar:focus{
+    border-top-style: unset;
+    border-left: none;
+    border-right: none;
+    border-color: blue;
+    animation-delay: 1s;
+ }
+
+ 
+ @media only screen and (max-width: 800px) {
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+        margin-left: 74px;
+    }
+ }

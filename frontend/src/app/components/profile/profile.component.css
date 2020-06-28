@@ -1,0 +1,37 @@
+body{padding-top:30px;}
+
+.glyphicon { 
+    align-items:center;
+     margin-bottom: 10px;
+     margin-right: 10px;}
+
+     .well-sm {
+        padding: 22px;
+        border-radius: 3px;
+        margin-left: 399px;
+    }
+    .img-rounded {
+        border-radius: -5px;
+        height: 104px;
+        width: 143px;
+        object-fit: cover;
+    }
+small {
+display: block;
+line-height: 1.428571429;
+color: #999;
+}
+@media only screen and (max-width: 600px) {
+    .well-sm {
+        padding: 22px;
+        border-radius: 3px;
+        margin-left: 3px;
+    }
+    .img-rounded {
+        border-radius: -5px;
+        height: 104px;
+        width: 143px;
+        object-fit: cover;
+    }
+  }
+  

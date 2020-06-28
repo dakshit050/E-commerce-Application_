@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<div id="login-box">
+    <div class="left">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <h1><a routerLink="/user/login" routerLinkActive="active">Login</a></h1>
+            <h1><a routerLink="/user/signup" routerLinkActive="active">Sign up</a></h1>
+        <div class="form-group">
+            <input type="text" formControlName="email" placeholder="E-mail" />
+        </div>
+        <div class="form-group">
+            <input type="password" formControlName="password" placeholder="Password" />
+
+        </div>
+        <div class="form-group">
+            <button class="btn btn-info" [disabled]="!loginForm.valid"  type="submit" >Login</button>
+        </div>
+        </form>
+    </div>
+    
+    <div class="right">
+      <span class="loginwith">Sign in with<br />social network</span>
+      
+      <button class="social-signin facebook">Log in with facebook</button>
+      <button class="social-signin twitter">Log in with Twitter</button>
+      <button class="social-signin google">Log in with Google+</button>
+    </div>
+    <div class="or">OR</div>
+  </div>

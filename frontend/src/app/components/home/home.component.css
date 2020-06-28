@@ -1,0 +1,11 @@
+.carousel-inner{
+    height:560px;
+    width: 500px;
+    background-repeat: no-repeat;
+}
+.carosual-image{
+height:462px;
+width: 1135px;
+object-fit: cover;
+object-position: center center;
+}

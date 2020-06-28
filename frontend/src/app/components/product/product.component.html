@@ -1,0 +1,54 @@
+<div class="site-wrap">
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Shop</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-9 order-2">
+          <div class="row">
+            <div class="col-sm-4" *ngFor="let p of products |filter:SearchText | slice: (p-1) * page : (p-1) * page + page;">
+                <div class="card" style="width: 14rem;">
+                  <img class="card-img-top image-resize" [src]="p.image" alt="{{p.title}}">
+                  <div class="card-body">
+                    <!--<h5 class="card-title">{{p.title}}</h5>-->
+                    <small class="mb-0">{{p.description |slice:0:100}}...</small>
+                    <p class="text-primary font-weight-bold">{{p.price |currency:'USD'}}</p>
+                    <button class="btn btn-primary" (click)="AddToCart(p.id)">ADD TO CART</button>
+                  </div>
+                </div>
+            </div>
+        </div>
+          <nav aria-label="Page navigation example">
+            <div class="d-flex justify-content-center" style="margin-top: 30px; margin-bottom: 30px;">
+              <ngb-pagination
+              [(page)]="p"
+              [pageSize]="page"
+              [collectionSize]="products.length"></ngb-pagination>
+              </div>
+            </nav>
+        </div>
+        <div class="col-md-3 order-1 mb-5 mb-md-0">
+          <div class="border p-4 rounded mb-4">
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1"><a href="#" class="d-flex"><span>Men</span> <span class="text-black ml-auto">(2,220)</span></a></li>
+              <li class="mb-1"><a href="#" class="d-flex"><span>Women</span> <span class="text-black ml-auto">(2,550)</span></a></li>
+              <li class="mb-1"><a href="#" class="d-flex"><span>Children</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+            </ul>
+          </div>
+          
+          <div class="border p-4 rounded mb-4">
+            <div class="md-form mt-0">
+              <input type="text"placeholder="Search" [(ngModel)]="SearchText"/>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </div>
+  </div>

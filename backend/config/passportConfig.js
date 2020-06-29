@@ -28,8 +28,8 @@ passport.use(
 passport.use(
     new GoogleStratergy({
     callbackURL:'/user/google/redirect',
-    clientID:"610071308585-23l7dsciudfmsechc09tj74ov9o637ad.apps.googleusercontent.com",
-    clientSecret:"hpy01fJ-v27WMUrHyuZ3P8Mv"
+    clientID:"YOUR_CLIENT_ID",
+    clientSecret:"YOUR_CLIENT_SECRET"
 },function(accessToken,refreshToken,profile,done){
     let sql=`SELECT id FROM users WHERE googleid='${profile.id}'`;
     database.query(sql,(err,results)=>{

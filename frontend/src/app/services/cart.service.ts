@@ -24,8 +24,7 @@ Order:any[]=[];
   cartData$= new BehaviorSubject<CartModelServer>(this.cartModelServer);
   cartTotal$ = new BehaviorSubject<number>(0);
  constructor(private ProductService:ProductService,
-            private toast:ToastrService,
-            private route:Router){
+            private toast:ToastrService){
   this.ProductService.getMyOrders().subscribe(
     data=>{
       this.Order=data['data'];
@@ -52,6 +51,7 @@ Order:any[]=[];
   );
 
  }
+ 
 GetSingleProduct(id:number){
 this.ProductService.getSingalProduct(id).subscribe(
   data=>{

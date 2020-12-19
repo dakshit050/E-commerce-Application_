@@ -1,9 +1,11 @@
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from './../../services/customer.service';
 import { Customer } from './../../models/customer.model';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,Validators, FormBuilder } from '@angular/forms';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-signup',
@@ -17,8 +19,14 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private customerService:CustomerService,
     private toastr:ToastrService,
-    private spinner:NgxSpinnerService
+    private spinner:NgxSpinnerService,
+    private authservice:SocialAuthService,
+    private router:Router
   ) { }
+
+  signInWithGoogle(): void {
+    this.authservice.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -33,6 +41,13 @@ export class SignupComponent implements OnInit {
       confirmpassword:['',Validators.required]
   
     });
+
+    this.authservice.authState.subscribe((user)=>{
+      this.customerService.GoogleOuth(user).subscribe(data=>{
+        this.customerService.SetToken(data['token']);
+        this.router.navigate(['cart']);
+      })
+    })
   }
   onSubmit(){
     this.customer=this.registrationForm.value;
@@ -69,15 +84,6 @@ export class SignupComponent implements OnInit {
 
 
   }
-  googleOuth(){
-    this.customerService.GoogleOuth().subscribe(
-      data=>{
-        console.log(data);
-      },
-      err=>{
-        console.log(err.error);
-      }
-    );
-  }
+
 
 }

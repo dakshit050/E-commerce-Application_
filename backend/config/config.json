@@ -1,4 +1,4 @@
 {
     "JWT_SECRET": "HJ&*%FGH!",
-    "JWT_EXP": "5d"
+    "JWT_EXP": "1d"
 }

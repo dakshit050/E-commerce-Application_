@@ -1,10 +1,11 @@
 const express=require('express');
 const {database}=require('../config/helper');
-const passport=require('passport');
+const  jwt=require('jsonwebtoken');
 const PasswordHash= require('password-hash');
 const jwthelper=require('../config/jwtHelper');
 const ctruser=require('../config/controller');
 const router=express.Router();
+const config=require('../config/config.json');
 router.post('/signup',function(req,res){
     const data=req.body;
     const pass=data.password;
@@ -13,7 +14,7 @@ router.post('/signup',function(req,res){
         let sql=`SELECT id FROM users WHERE email='${data.email}'`;
         database.query(sql,(err,results)=>{
             if(results.length>0){
-                res.status(404).json({status:false,message:'Email Allready Exist.'});
+                res.status(405).json({status:false,message:'Email Allready Exist.'});
             }else{
                 
                 let sql=`INSERT INTO users (id,googleid,username,password,email,DOB) Values(
@@ -34,13 +35,52 @@ router.post('/signup',function(req,res){
             }
         })
     }else{
-        res.status(404).json({status:false,message:"Please Fill the Form"});
+        res.status(405).json({status:false,message:"Please Fill the Form"});
     }
    });
-   router.get('/google',passport.authenticate('google',{
-       scope:['profile','email']
-   }));
-   router.get('/google/redirect',ctruser.googleOuth);
+   
+   router.post('/google',function(req,res){
+    const user=req.body;
+    if(user!==undefined){
+        let sql=`SELECT id FROM users WHERE email='${user.email}'`;
+        database.query(sql,(error,results)=>{
+            if(results[0]!==undefined){
+                res.status(200).json({"token":jwt.sign(
+                    {_id:results[0].id},
+                    config.JWT_SECRET,
+                    {expiresIn:config.JWT_EXP}
+                    
+                )});
+            }else{
+                let sql=`INSERT INTO users (id,googleid,username,password,email,photoUrl) Values(
+                    '',
+                    '${user.id}',
+                    '${user.name}',
+                    '',
+                    '${user.email}',
+                    '${user.photoUrl}'
+                )`; 
+                database.query(sql,(err,result)=>{
+                    if(err){
+                        throw err;
+                    }
+                   
+                     res.status(200).json({"token":jwt.sign(
+                        {_id:result.insertId},
+                        config.JWT_SECRET,
+                        {expiresIn:config.JWT_EXP}
+                        
+                    )});
+                });
+
+            }  
+        })
+
+    }
+
+   })
+
+
    router.post('/login',ctruser.authenticate);
    router.get('/profile',jwthelper.verifyjwtoken,ctruser.userprofile);
    module.exports=router;

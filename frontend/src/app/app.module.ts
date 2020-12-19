@@ -16,7 +16,12 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,10 +41,27 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    SocialLoginModule
 
   ],
   providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.GoogleAPI,{
+                scope:'https://www.googleapis.com/auth/userinfo.profile'
+              }
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    },
     {
       provide:HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

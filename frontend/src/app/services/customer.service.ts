@@ -11,8 +11,8 @@ export class CustomerService {
   SERVER_URL=environment.SERVER_URL;
   constructor(private http:HttpClient) { }
   noAuthHeader ={headers: new HttpHeaders({'NoAuth':'True'})};
-  GoogleOuth(){
-    return this.http.get(this.SERVER_URL+'user/google',this.noAuthHeader);
+  GoogleOuth(User:any){
+    return this.http.post(this.SERVER_URL+'user/google',User,this.noAuthHeader);
   }
   AddNewUser(customer:Customer){
     return this.http.post(this.SERVER_URL+'user/signup',customer,this.noAuthHeader);

@@ -5,6 +5,7 @@ import { response } from './../../models/customer.model';
 import { CustomerService } from './../../services/customer.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,14 @@ response: response = new response();
     private customerService:CustomerService,
     private routes:Router,
     private toster:ToastrService,
-    private spinner:NgxSpinnerService
+    private spinner:NgxSpinnerService,
+    private authservice:SocialAuthService
   ) { }
+
+  signInWithGoogle(): void {
+    this.authservice.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
 servererrormsg:string;
   ngOnInit(): void {
     this.spinner.show();
@@ -32,6 +39,13 @@ servererrormsg:string;
       email:['',Validators.required],
       password:['',Validators.required]
     });
+
+    this.authservice.authState.subscribe((user)=>{
+      this.customerService.GoogleOuth(user).subscribe(data=>{
+        this.customerService.SetToken(data['token']);
+        this.routes.navigate(['cart']);
+      })
+    })
   }
 onSubmit(){
   this.customerService.Authenticate(this.loginForm.value).subscribe(data=>{

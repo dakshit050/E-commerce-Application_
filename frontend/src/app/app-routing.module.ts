@@ -19,7 +19,7 @@ const routes: Routes = [
   {path:'user/signup', component:SignupComponent},
   {path:'user/login',component:LoginComponent},
   {path:'profile',component:ProfileComponent,canActivate:[AuthGardGuard]},
-  {path:'',component:HomeComponent,canActivate:[AuthGardGuard]}
+  {path:'**',redirectTo:'home'}
 ];
 
 @NgModule({

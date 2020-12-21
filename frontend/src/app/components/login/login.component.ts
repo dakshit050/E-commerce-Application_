@@ -31,15 +31,10 @@ response: response = new response();
 
 servererrormsg:string;
   ngOnInit(): void {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
     this.loginForm=this.formBuilder.group({
       email:['',Validators.required],
       password:['',Validators.required]
     });
-
     this.authservice.authState.subscribe((user)=>{
       this.customerService.GoogleOuth(user).subscribe(data=>{
         this.customerService.SetToken(data['token']);
@@ -48,11 +43,14 @@ servererrormsg:string;
     })
   }
 onSubmit(){
+  this.spinner.show();
   this.customerService.Authenticate(this.loginForm.value).subscribe(data=>{
+    this.spinner.hide();
     this.customerService.SetToken(data['token']);
     this.routes.navigateByUrl('/home');
   },
     err=>{
+      this.spinner.hide();
       this.toster.error(err.error.message,'Error',{
         timeOut:2000,
         progressBar:true,

@@ -21,10 +21,9 @@
     
     <div class="right">
       <span class="loginwith">Sign in with<br />social network</span>
-      
-      <button class="social-signin facebook">Log in with facebook</button>
-      <button class="social-signin twitter">Log in with Twitter</button>
-      <button class="social-signin google" (click)="signInWithGoogle()">Log in with Google+</button>
+      <button class="btn social-signin facebook" [disabled]="!loginForm.valid"  type="submit" >Log in with facebook</button>
+      <button class="btn social-signin twitter" [disabled]="!loginForm.valid" type="submit">Log in with Twitter</button>
+      <button class="social-signin google" (click)="signInWithGoogle()">Log in with Google</button>
     </div>
     <div class="or">OR</div>
   </div>

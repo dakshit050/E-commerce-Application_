@@ -29,10 +29,6 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
     this.registrationForm = this.formBuilder.group({
       username: ['',[Validators.minLength(3),Validators.maxLength(20),Validators.required]],
       email: ['',Validators.required],
@@ -50,11 +46,12 @@ export class SignupComponent implements OnInit {
     })
   }
   onSubmit(){
+    this.spinner.show();
     this.customer=this.registrationForm.value;
     if( this.customer.password!==undefined && this.customer.confirmpassword!==undefined && this.customer.password===this.customer.confirmpassword){
       this.customerService.AddNewUser(this.customer).subscribe(
         data=>{
-          console.log(data);
+          this.spinner.hide();
           this.toastr.success('Account created successfully','welcome',{
             timeOut:2000,
             progressBar:true,
@@ -63,7 +60,7 @@ export class SignupComponent implements OnInit {
         });
         },
         err=>{
-          console.log(err.error.message);
+          this.spinner.hide();
           this.toastr.error(err.error.message,'Soory!',{
             timeOut:2000,
             progressBar:true,
@@ -74,6 +71,7 @@ export class SignupComponent implements OnInit {
       );
 
     }else{
+      this.spinner.hide();
       this.toastr.error('Password Does not match','Error',{
           timeOut:2000,
           progressBar:true,

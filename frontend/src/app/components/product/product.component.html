@@ -7,16 +7,15 @@
     </div>
   </div>
 
-  <div class="site-section">
+<!--   <div class="site-section">
     <div class="container">
       <div class="row mb-5">
         <div class="col-md-9 order-2">
           <div class="row">
             <div class="col-sm-4" *ngFor="let p of products |filter:SearchText | slice: (p-1) * page : (p-1) * page + page;">
-                <div class="card" style="width: 14rem;">
+                <div class="card" style="width: 14rem; margin-top:1rem">
                   <img class="card-img-top image-resize" src="{{this.image+p.image}}" alt="{{p.title}}">
                   <div class="card-body">
-                    <!--<h5 class="card-title">{{p.title}}</h5>-->
                     <small class="mb-0">{{p.description |slice:0:100}}...</small>
                     <p class="text-primary font-weight-bold">{{p.price |currency:'USD'}}</p>
                     
@@ -52,5 +51,71 @@
           </div>
         </div>
       </div>   
+    </div>
+  </div> -->
+
+  <div class="site-section">
+    <div class="container">
+
+      <div class="row mb-5">
+        <div class="col-md-9 order-2">
+
+          <div class="row">
+            <div class="col-md-12 mb-5">
+              <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
+              <div class="d-flex">
+                <div class="dropdown mr-1 ml-md-auto">
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+
+            <div class="col-sm-6 col-lg-4 mb-4" *ngFor="let p of products |filter:SearchText | slice: (p-1) * page : (p-1) * page + page;" data-aos="fade-up">
+              <div class="block-4 text-center border">
+                <figure class="block-4-image">
+                  <a href="shop-single.html"><img src="{{this.image+p.image}}" alt="{{p.title}}" class="img-fluid"></a>
+                </figure>
+                <div class="block-4-text p-4">
+                  <h3><a>{{p.title}}</a></h3>
+                  <p class="mb-0">{{p.description |slice:0:100}}...</p>
+                  <p class="text-primary font-weight-bold">{{p.price |currency:'USD'}}</p>
+                  <button class="btn btn-primary btn-block" (click)="AddToCart(p.id)">ADD TO CART</button>
+                  <button *ngIf="isAdmin" class="btn btn-danger btn-block" style="margin-top: 3px;" (click)="DELETE(p.id)">DELETE</button>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+          <nav aria-label="Page navigation example">
+            <div class="d-flex justify-content-center" style="margin-top: 30px; margin-bottom: 30px;">
+              <ngb-pagination
+              [(page)]="p"
+              [pageSize]="page"
+              [collectionSize]="products.length"></ngb-pagination>
+              </div>
+            </nav>
+        </div>
+
+        <div class="col-md-3 order-1 mb-5 mb-md-0">
+          <div class="border p-4 rounded mb-4">
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1"><a  class="d-flex"><span>Men</span> <span class="text-black ml-auto">(2,220)</span></a></li>
+              <li class="mb-1"><a  class="d-flex"><span>Women</span> <span class="text-black ml-auto">(2,550)</span></a></li>
+              <li class="mb-1"><a  class="d-flex"><span>Children</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+            </ul>
+          </div>
+          <div class="border p-4 rounded mb-4">
+            <div class="md-form mt-0">
+              <input type="text" class="form-control" placeholder="Search" [(ngModel)]="SearchText"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
     </div>
   </div>

@@ -25,15 +25,14 @@ userdetails={
 
   ngOnInit(): void {
     this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
     this.customerService.UserProfle().subscribe(
       res=>{
         this.userdetails=res['user'];
+        this.spinner.hide();
       },
       err=>{
         console.log(err);
+        this.spinner.hide();
       }
     );
   }

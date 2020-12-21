@@ -19,7 +19,8 @@
             <span *ngIf="registrationForm.get('email').invalid && registrationForm.get('email').touched"><small class="text-danger">Email id can not be empty</small></span>
         </div>
         <div class="form-group">
-            <input type="text" formControlName="Birthday" placeholder="Date of Birth" />
+            <label for="Birthday">Birthday</label>
+            <input class="form-control" type="Date" formControlName="Birthday" placeholder="Date of Birth" />
             <span *ngIf="registrationForm.get('Birthday').invalid && registrationForm.get('Birthday').touched"><small class="text-danger">Date of Birth can not be empty</small></span>
         </div>
         <div class="form-group">
@@ -42,9 +43,9 @@
     <div class="right">
       <span class="loginwith">Sign in with<br />social network</span>
       
-      <button class="social-signin facebook">Log in with facebook</button>
-      <button class="social-signin twitter">Log in with Twitter</button>
-      <button class="social-signin google" (click)="signInWithGoogle()">Log in with Google+</button>
+      <button class="btn social-signin facebook"  [disabled]="!registrationForm.valid" type="submit" >Log in with facebook</button>
+      <button class="btn social-signin twitter"  [disabled]="!registrationForm.valid" type="submit" >Log in with Twitter</button>
+      <button class="social-signin google" (click)="signInWithGoogle()">Log in with Google</button>
     </div>
     <div class="or">OR</div>
   </div>

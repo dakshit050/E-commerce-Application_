@@ -21,14 +21,13 @@ image=environment.Images;
               private router:Router) { }
 
   ngOnInit(): void {
-   this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
+    this.spinner.show();
     this.cartService.cartData$.subscribe(data=>{
       this.CartData=data
+      this.spinner.hide();
     },error=>{
       if(error.status===401){
+        this.spinner.hide();
         this.customerservice.DeleteToken();
         this.router.navigate(['user/login']);
       }

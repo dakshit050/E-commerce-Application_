@@ -11,10 +11,7 @@ export class ContactComponent implements OnInit {
   constructor(private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
+
   }
 
 }

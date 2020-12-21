@@ -27,13 +27,11 @@ export class ProductComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isAdmin=this.customerservice.isAdmin();
     this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
+    this.isAdmin=this.customerservice.isAdmin();
     this.productService.getAllProducts().subscribe((prods:{count:Number,products:any[]})=>{
       this.products=prods.products;
+      this.spinner.hide();
     })
   }
   AddToCart(id:number){

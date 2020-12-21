@@ -12,10 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(private spinner:NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.spinner.show();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 3000);
 
   }
  products = ['../../../assets/images/cloth_1.jpg','../../../assets/images/cloth_2.jpg','../../../assets/images/cloth_3.jpg','../../../assets/images/shoe.png'];

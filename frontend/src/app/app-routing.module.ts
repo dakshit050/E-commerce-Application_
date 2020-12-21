@@ -1,3 +1,4 @@
+import { AdminComponent } from './components/admin/admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGardGuard } from './auth/auth-gard.guard';
 import { LoginComponent } from './components/login/login.component';
@@ -9,6 +10,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminGuardGuard } from './auth/admin-guard.guard';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
@@ -19,6 +21,7 @@ const routes: Routes = [
   {path:'user/signup', component:SignupComponent},
   {path:'user/login',component:LoginComponent},
   {path:'profile',component:ProfileComponent,canActivate:[AuthGardGuard]},
+  {path:'admin',component:AdminComponent,canActivate:[AuthGardGuard,AdminGuardGuard]},
   {path:'**',redirectTo:'home'}
 ];
 

@@ -12,12 +12,14 @@ import { Router, Routes } from '@angular/router';
 export class HeaderComponent implements OnInit {
   CartData:CartModelServer;
   isLogin=false;
+  isAdmin=false;
   constructor(private cartService:CartService,
               public customerService:CustomerService,
               private routes:Router) { }
 
   ngOnInit(): void {
     this.isLogin=this.customerService.isLogin();
+    this.isAdmin=this.customerService.isAdmin();
     this.cartService.cartData$.subscribe(data=>this.CartData=data);
   }
 onsubmit(){
@@ -29,6 +31,7 @@ onsubmit(){
     }]
   }
   this.isLogin=false;
+  this.isAdmin=false;
   this.customerService.DeleteToken();
   this.cartService.cartData$.next(this.CartData);
   this.routes.navigateByUrl('user/login');

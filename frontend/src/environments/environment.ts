@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   SERVER_URL: "http://localhost:3000/",
-  GoogleAPI:"client_ID"
+  Images:"http://localhost:3000/",
+  GoogleAPI:"Client_ID"
 };
 
 /*

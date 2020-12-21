@@ -25,7 +25,7 @@
               <tbody>
                 <tr *ngFor="let p of CartData.Product; let i=index">
                   <td class="product-thumbnail">
-                    <img  class="img-fluid" [src]="p.Data.image" alt="{{p.Data.name}}">
+                    <img  class="img-fluid" src="{{this.image+p.Data.image}}" alt="{{p.Data.name}}">
                   </td>
                   <td class="product-name">
                     <h2 class="h5 text-black">{{p.Data.title}}</h2>

@@ -5,9 +5,9 @@
         <div class="container">
 
           <div class="row align-items-center">
-            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
+            <div class="col-6 col-md-4 order-2 order-md-1 text-left">
               <div  class="site-block-top-search">
-                <span class="icon icon-search2"></span>
+                <!-- <span class="icon icon-search2"></span> -->
               </div>
             </div>
 
@@ -47,6 +47,7 @@
             <li routerLinkActive="has active"><a routerLink="/home">Home</a></li>
             <li routerLinkActive="active"><a routerLink="/product" >Shop</a></li>
             <li routerLinkActive="active"><a routerLink="/contact" >Contact</a></li>
+            <li *ngIf="isAdmin" routerLinkActive="active"><a routerLink="/admin" >Admin-panel</a></li>
           </ul>
         </div>
       </nav>

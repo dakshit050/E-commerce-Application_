@@ -14,7 +14,7 @@ const storage= multer.diskStorage({
 });
 
 const fileFilter=(req,file,cb)=>{
-    if(file.mimetype==='image/jpeg' || file.mimetype==='image/png' || file.mimetype==='image/jpg'){
+    if(file.mimetype==='image/jpeg' || file.mimetype==='image/png' || file.mimetype==='image/jpg' || file.mimetype==='image/jfif'){
         cb(null,true);
     }else{
         cb(new Error("file type not supported"),false);
@@ -54,7 +54,7 @@ router.post('/',jwthelper.verifyjwtoken,upload.single('productImages'),function(
         let newProduct=req.body;
         let sql=`INSERT INTO products (title,image,description,price,quantity,short_desc) Values(
             '${newProduct.title}',
-            '${req.file.path}',
+            '${'uploads/'+req.file.filename}',
             '${newProduct.description}',
             '${newProduct.price}',
             '${newProduct.quantity}',

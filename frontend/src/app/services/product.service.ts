@@ -30,4 +30,12 @@ getMyOrders(){
 UpdateQuantity(data:OrderDetails){
   return this.http.post(this.SERVER_URL+'order/update',data);
 }
+
+AddNewProduct(newProduct:FormData){
+  return this.http.post(this.SERVER_URL+'home',newProduct);
+}
+
+Delete(id:number){
+  return this.http.delete(this.SERVER_URL+'home/'+id);
+}
 }

@@ -22,13 +22,15 @@ import {
   FacebookLoginProvider
 } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { AdminComponent } from './components/admin/admin.component';
 @NgModule({
   declarations: [
     AppComponent,
     routingComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

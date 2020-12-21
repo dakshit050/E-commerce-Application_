@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { Router } from '@angular/router';
 import { CustomerService } from './../../services/customer.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -13,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 CartData:CartModelServer;
+image=environment.Images;
   constructor(public cartService:CartService,
               private customerservice:CustomerService,
               private spinner:NgxSpinnerService,

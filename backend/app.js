@@ -16,7 +16,7 @@ app.use(cors({
     
     
 }));
-app.use('/uploads',jwthelper.verifyjwtoken,express.static('uploads'));
+app.use('/uploads',express.static('uploads'));
 app.use('/home',productRoutes);
 app.use('/user',userRoutes);
 app.use('/order',orderRoutes)

@@ -42,6 +42,15 @@ getuserpayload(){
     return null;
   }
 }
+
+isAdmin(){
+  let user=this.getuserpayload();
+  if(user){
+    return user._type==='Admin'
+  }else{
+    return false;
+  }
+}
 isLogin(){
   let user= this.getuserpayload();
   if(user){

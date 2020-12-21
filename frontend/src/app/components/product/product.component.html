@@ -14,12 +14,14 @@
           <div class="row">
             <div class="col-sm-4" *ngFor="let p of products |filter:SearchText | slice: (p-1) * page : (p-1) * page + page;">
                 <div class="card" style="width: 14rem;">
-                  <img class="card-img-top image-resize" [src]="p.image" alt="{{p.title}}">
+                  <img class="card-img-top image-resize" src="{{this.image+p.image}}" alt="{{p.title}}">
                   <div class="card-body">
                     <!--<h5 class="card-title">{{p.title}}</h5>-->
                     <small class="mb-0">{{p.description |slice:0:100}}...</small>
                     <p class="text-primary font-weight-bold">{{p.price |currency:'USD'}}</p>
-                    <button class="btn btn-primary" (click)="AddToCart(p.id)">ADD TO CART</button>
+                    
+                    <button class="btn btn-primary btn-block" (click)="AddToCart(p.id)">ADD TO CART</button>
+                    <button *ngIf="isAdmin" class="btn btn-danger btn-block" style="margin-top: 3px;" (click)="DELETE(p.id)">DELETE</button>
                   </div>
                 </div>
             </div>
@@ -45,7 +47,7 @@
           
           <div class="border p-4 rounded mb-4">
             <div class="md-form mt-0">
-              <input type="text"placeholder="Search" [(ngModel)]="SearchText"/>
+              <input type="text" class="form-control" placeholder="Search" [(ngModel)]="SearchText"/>
             </div>
           </div>
         </div>

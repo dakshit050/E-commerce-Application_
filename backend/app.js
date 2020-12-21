@@ -7,6 +7,7 @@ const app=express();
 const passport=require('passport');
 const userRoutes=require('./routes/user');
 const orderRoutes=require('./routes/order');
+const jwthelper=require('./config/jwtHelper');
 app.use(passport.initialize());
 app.use(bodyParser.json());
 app.use(cors({
@@ -15,6 +16,7 @@ app.use(cors({
     
     
 }));
+app.use('/uploads',jwthelper.verifyjwtoken,express.static('uploads'));
 app.use('/home',productRoutes);
 app.use('/user',userRoutes);
 app.use('/order',orderRoutes)

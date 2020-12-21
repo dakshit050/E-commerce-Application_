@@ -14,6 +14,7 @@ module.exports.verifyjwtoken=(req,res,next)=>{
             }
         else {
             req._id = decode._id;
+            req._type=decode._type;
             next();
         }
         })

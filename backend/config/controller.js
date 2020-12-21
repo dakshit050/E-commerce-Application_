@@ -10,7 +10,8 @@ module.exports.authenticate=(req,res,next)=>{
         } 
         else if(user){
             return res.status(200).json({"token":jwt.sign(
-                {_id:user.id},
+                {_id:user.id,
+                _type:user.Role},
                 config.JWT_SECRET,
                 {expiresIn:config.JWT_EXP}
                 

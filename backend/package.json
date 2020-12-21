@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.19",
+    "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "mysqli": "^3.0.11",
     "passport": "^0.4.1",

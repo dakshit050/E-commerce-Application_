@@ -1,3 +1,5 @@
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGardGuard } from './auth/auth-gard.guard';
@@ -21,7 +23,10 @@ const routes: Routes = [
   {path:'user/signup', component:SignupComponent},
   {path:'user/login',component:LoginComponent},
   {path:'profile',component:ProfileComponent,canActivate:[AuthGardGuard]},
+  {path:'product/:id',component:SingleProductComponent},
   {path:'admin',component:AdminComponent,canActivate:[AuthGardGuard,AdminGuardGuard]},
+  {path:'checkout',component:CheckoutComponent,canActivate:[AuthGardGuard]},
+  {path:'thankyou',component:ThankyouComponent,canActivate:[AuthGardGuard]},
   {path:'**',redirectTo:'home'}
 ];
 

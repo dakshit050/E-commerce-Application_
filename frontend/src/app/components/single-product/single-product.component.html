@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0"><a routerLink="/product" >Shop</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">{{this.ProductData?.title}}</strong></div>
+      </div>
+    </div>
+  </div>  
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="{{this.url+this.ProductData?.image}}" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+          <h2 class="text-black">{{this.ProductData?.title}}</h2>
+          <p>{{this.ProductData?.description}}.</p>
+          <p class="mb-4">{{this.ProductData?.short_desc}}</p>
+          <p><strong class="text-primary h4">{{this.ProductData?.price |currency:'USD'}}</strong></p>
+<!--           <div class="mb-5">
+            <div class="input-group mb-3" style="max-width: 120px;">
+            <div class="input-group-prepend">
+              <button  [disabled]="this.quantity==0" class="btn btn-outline-primary js-btn-minus" type="button" (click)="this.cartService.UpdateCart(this.index,false)">-</button>
+            </div>
+            <div type="text" class="form-control text-center" aria-label="Example text with button addon" aria-describedby="button-addon1">{{this.quantity}}</div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary js-btn-plus" type="button" (click)="this.cartService.UpdateCart(this.index,true)">+</button>
+            </div>
+          </div>
+
+          </div> -->
+          <p><button (click)="AddToCart(this.ProductData.id)" class="btn btn-sm btn-primary">Add To Cart</button></p>
+
+        </div>
+      </div>
+    </div>
+  </div>

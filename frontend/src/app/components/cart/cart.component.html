@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="bg-light py-3">
     <div class="container">
       <div class="row">
@@ -5,7 +7,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="CartData.Total!==0;then thenBlock;else elseBlock"></div>>
+  <div *ngIf="CartData.Total!==0;then thenBlock;else elseBlock"></div>
   <ng-template #thenBlock>
   <div class="site-section">
     <div class="container">
@@ -102,7 +104,7 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <button class="btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
+                  <a class="btn btn-primary btn-lg py-3 btn-block" routerLink="/checkout">Proceed To Checkout</a>
                 </div>
               </div>
             </div>
@@ -115,10 +117,12 @@
   </div>
 </ng-template>
 <ng-template #elseBlock>
+  <br>
   <h4 style="text-align:center;">Your Cart Is Empty!</h4>
   <div style="text-align:center;margin-top:10px;">
     <a routerLink="/product" routerLinkActive="active">  <button class="btn btn-primary">Shop Now</button></a>
   </div>
+  <br>
 </ng-template>
 
 

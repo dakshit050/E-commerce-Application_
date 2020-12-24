@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class ProductService {
 SERVER_URL = environment.SERVER_URL;
   constructor(private http:HttpClient,
-    private customerService:CustomerService) { }
+    private customerService:CustomerService) {}
     noAuthHeader ={headers: new HttpHeaders({'NoAuth':'True'})};
 getAllProducts(numberOfResults:number=10){
    return this.http.get(this.SERVER_URL+'home');
@@ -38,4 +38,16 @@ AddNewProduct(newProduct:FormData){
 Delete(id:number){
   return this.http.delete(this.SERVER_URL+'home/'+id);
 }
+getsingleproduct(id:number){
+  return this.http.get(this.SERVER_URL+'home/'+id);
+}
+
+getFilters(id:number){
+  return this.http.get(this.SERVER_URL+'home/catagory/'+id);
+}
+
+placeOrder(){
+  return this.http.delete(this.SERVER_URL+'order');
+}
+
 }

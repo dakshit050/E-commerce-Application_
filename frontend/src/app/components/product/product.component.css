@@ -39,3 +39,7 @@
         margin-left: 74px;
     }
  }
+
+ .img-fluid{
+     max-height: 10rem;
+ }

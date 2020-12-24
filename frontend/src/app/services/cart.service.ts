@@ -25,6 +25,9 @@ Order:any[]=[];
   cartTotal$ = new BehaviorSubject<number>(0);
  constructor(private ProductService:ProductService,
             private toast:ToastrService){
+
+              this.cartTotal$.next(this.cartModelServer.Total);
+              this.cartData$.next(this.cartModelServer);
   this.ProductService.getMyOrders().subscribe(
     data=>{
       this.Order=data['data'];
@@ -146,6 +149,7 @@ this.OrderDetails={
   id:id,
   quantity:quantity
 }
+
 this.ProductService.UpdateQuantity(this.OrderDetails).subscribe();
 this.CalculateTotal();
 this.cartData$.next(this.cartModelServer);
@@ -170,10 +174,32 @@ CalculateTotal(){
   let Total=0;
   this.cartModelServer.Product.forEach(p=>{
     let price=p.Data.price;
-    let quantity=p.Data.quantity;
+    let quantity=p.quantity;
     Total+=Number(price)*Number(quantity);
   });
   this.cartModelServer.Total=Total;
   this.cartTotal$.next(this.cartModelServer.Total);
+}
+
+checkout(){
+  this.ProductService.placeOrder().subscribe(data=>{
+    this.cartModelServer={
+      Total:0,
+      Product:[{
+        Data:undefined,
+        quantity:0
+      }
+      ]
+    }
+    this.cartData$.next(this.cartModelServer);
+    this.CalculateTotal();
+  },err=>{
+    this.toast.error(`Sorry, failed to book the order`, "Order Status", {
+      timeOut: 1500,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      positionClass: 'toast-top-right'
+    })
+  });
 }
 }

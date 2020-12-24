@@ -23,6 +23,9 @@ import {
 } from 'angularx-social-login';
 import { environment } from 'src/environments/environment';
 import { AdminComponent } from './components/admin/admin.component';
+import { SingleProductComponent } from './components/single-product/single-product.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +33,10 @@ import { AdminComponent } from './components/admin/admin.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    ProfileComponent,
+    SingleProductComponent,
+    ThankyouComponent
   ],
   imports: [
     BrowserModule,

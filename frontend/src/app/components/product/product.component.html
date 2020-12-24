@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="site-wrap">
   <div class="bg-light py-3">
     <div class="container">
@@ -76,12 +78,14 @@
             <div class="col-sm-6 col-lg-4 mb-4" *ngFor="let p of products |filter:SearchText | slice: (p-1) * page : (p-1) * page + page;" data-aos="fade-up">
               <div class="block-4 text-center border">
                 <figure class="block-4-image">
-                  <a href="shop-single.html"><img src="{{this.image+p.image}}" alt="{{p.title}}" class="img-fluid"></a>
+                  <img src="{{this.image+p.image}}" alt="{{p.title}}" class="img-fluid">
                 </figure>
                 <div class="block-4-text p-4">
+                  <a style="text-decoration:none;color: inherit;" routerLink="/product/{{p.id}}">
                   <h3><a>{{p.title}}</a></h3>
                   <p class="mb-0">{{p.description |slice:0:100}}...</p>
                   <p class="text-primary font-weight-bold">{{p.price |currency:'USD'}}</p>
+                  </a>
                   <button class="btn btn-primary btn-block" (click)="AddToCart(p.id)">ADD TO CART</button>
                   <button *ngIf="isAdmin" class="btn btn-danger btn-block" style="margin-top: 3px;" (click)="DELETE(p.id)">DELETE</button>
                 </div>
@@ -109,8 +113,19 @@
             </ul>
           </div>
           <div class="border p-4 rounded mb-4">
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Search Products</h3>
             <div class="md-form mt-0">
               <input type="text" class="form-control" placeholder="Search" [(ngModel)]="SearchText"/>
+            </div>
+          </div>
+          <div class="border p-4 rounded mb-4">
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter By</h3>
+            <div class="md-form mt-0">
+              <select class="form-control" (change)="onChange($event.target.value)">
+                <ng-container  *ngFor="let filter of Filters; let i=index">
+                  <option [value]="i">{{filter}}</option>
+              </ng-container>
+              </select>
             </div>
           </div>
         </div>

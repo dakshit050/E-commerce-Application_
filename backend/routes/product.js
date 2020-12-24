@@ -37,10 +37,10 @@ router.get('/',function(req,res){
         });
     });
 });
-router.get('/:id',jwthelper.verifyjwtoken,function(req,res){
+router.get('/:id',function(req,res){
     let ID=req.params.id;
-    let sql=`SELECT * FROM products WHERE id= ${ID}`;
-    database.query(sql,(err,result) =>{
+    let sql=`SELECT * FROM products WHERE id= ?`;
+    database.query(sql,[ID],(err,result) =>{
         if(err){
             throw err;
         }
@@ -52,15 +52,8 @@ router.post('/',jwthelper.verifyjwtoken,upload.single('productImages'),function(
     if(req._type.localeCompare("Admin")==0){
 
         let newProduct=req.body;
-        let sql=`INSERT INTO products (title,image,description,price,quantity,short_desc) Values(
-            '${newProduct.title}',
-            '${'uploads/'+req.file.filename}',
-            '${newProduct.description}',
-            '${newProduct.price}',
-            '${newProduct.quantity}',
-            '${newProduct.short_desc}'
-            )`;
-            database.query(sql,(err,result)=>{
+        let sql=`INSERT INTO products SET title= ?,image= ?,description= ?,price= ?,quantity= ?,short_desc= ?,cat_id= ?`;
+            database.query(sql,[newProduct.title,'uploads/'+req.file.filename,newProduct.description,newProduct.price,newProduct.quantity,newProduct.short_desc,newProduct.cat_id],(err,result)=>{
                 if(err){
                     throw err;
                 }
@@ -79,8 +72,8 @@ router.post('/',jwthelper.verifyjwtoken,upload.single('productImages'),function(
 router.delete('/:id',jwthelper.verifyjwtoken,function(req,res){
     if(req._type.localeCompare("Admin")==0){
         var id=req.params.id;
-        let sql=`DELETE FROM products WHERE id=${id}`;
-        database.query(sql,(err,result)=>{
+        let sql=`DELETE FROM products WHERE id= ?`;
+        database.query(sql,[id],(err,result)=>{
             if(err){
                 throw err;
             }
@@ -95,5 +88,15 @@ router.delete('/:id',jwthelper.verifyjwtoken,function(req,res){
     }
 });
 
+router.get('/catagory/:id',(req,res)=>{
+    let ID=req.params.id;
+    let sql=`SELECT * FROM products WHERE cat_id= ?`;
+    database.query(sql,[ID],(err,result) =>{
+        if(err){
+            throw err;
+        }
+        res.status(200).json(result);
+    });
+});
 module.exports=router;
 

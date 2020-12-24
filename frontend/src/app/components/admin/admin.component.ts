@@ -10,11 +10,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AdminComponent implements OnInit {
   NewProductForm:FormGroup;
+  Catagorys=['Sports','Electronics','Cloths','Books,Media'];
   constructor(private fb:FormBuilder,
               private productService:ProductService,
               private toaster:ToastrService) {
     this.NewProductForm=this.fb.group({
       title:['',Validators.required],
+      catagory:['',Validators.required],
       image:['',Validators.required],
       description:['',Validators.required],
       price:['',Validators.required],
@@ -38,12 +40,14 @@ export class AdminComponent implements OnInit {
     const formData = new FormData();
     formData.append('productImages', this.NewProductForm.get('image').value);
     formData.append('title', this.NewProductForm.get('title').value);
+    formData.append('cat_id', this.NewProductForm.get('catagory').value);
     formData.append('description', this.NewProductForm.get('description').value);
     formData.append('price', this.NewProductForm.get('price').value);
     formData.append('quantity', this.NewProductForm.get('quantity').value);
     formData.append('short_desc', this.NewProductForm.get('short_desc').value);
     if(this.NewProductForm.valid){
       this.productService.AddNewProduct(formData).subscribe((success)=>{
+        this.NewProductForm.reset();
         this.toaster.success(`${success['message']}`,"Product Added",{
           timeOut:2000,
           progressBar:true,

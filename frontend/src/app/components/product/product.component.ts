@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { CartService } from './../../services/cart.service';
 import { ProductService } from './../../services/product.service';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
@@ -14,10 +15,11 @@ import { Component, OnInit } from '@angular/core';
 export class ProductComponent implements OnInit {
   p: number = 1;
   page:number =12;
-  products:any[]=[];
+  products:any=[];
   image=environment.Images;
   isAdmin=false;
   SearchText:string;
+  Filters=['All','Sports','Electronics','Cloths','Books,Media'];
   constructor(
     private productService:ProductService,
               private cartService:CartService,
@@ -38,6 +40,22 @@ export class ProductComponent implements OnInit {
     this.cartService.GetSingleProduct(id);
   }
 
+  onChange(deviceValue) {
+    if(deviceValue==0){
+      this.spinner.show();
+      this.productService.getAllProducts().subscribe((prods:{count:Number,products:any[]})=>{
+        console.log(prods);
+        this.products=prods.products;
+        this.spinner.hide();
+      })
+    }else{
+      this.spinner.show();
+      this.productService.getFilters(deviceValue).subscribe(product=>{
+        this.products=product;
+        this.spinner.hide();
+      })
+    }
+}
   DELETE(id:number){
     if(window.confirm("Are you sure you want to delete the item?")){
       this.productService.Delete(id).subscribe((success)=>{

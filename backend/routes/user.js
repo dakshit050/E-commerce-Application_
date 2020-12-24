@@ -11,8 +11,8 @@ router.post('/signup',function(req,res){
     const pass=data.password;
     const hash=PasswordHash.generate(pass);
     if(data!=undefined){
-        let sql=`SELECT id FROM users WHERE email='${data.email}'`;
-        database.query(sql,(err,results)=>{
+        let sql=`SELECT id FROM users WHERE email= ?`;
+        database.query(sql,[data.email],(err,results)=>{
             if(results.length>0){
                 res.status(405).json({status:false,message:'Email Allready Exist.'});
             }else{
@@ -42,8 +42,8 @@ router.post('/signup',function(req,res){
    router.post('/google',function(req,res){
     const user=req.body;
     if(user!==undefined){
-        let sql=`SELECT id FROM users WHERE email='${user.email}'`;
-        database.query(sql,(error,results)=>{
+        let sql=`SELECT id FROM users WHERE email= ?`;
+        database.query(sql,user.email,(error,results)=>{
             if(results[0]!==undefined){
                 res.status(200).json({"token":jwt.sign(
                     {_id:results[0].id},
@@ -52,15 +52,8 @@ router.post('/signup',function(req,res){
                     
                 )});
             }else{
-                let sql=`INSERT INTO users (id,googleid,username,password,email,photoUrl) Values(
-                    '',
-                    '${user.id}',
-                    '${user.name}',
-                    '',
-                    '${user.email}',
-                    '${user.photoUrl}'
-                )`; 
-                database.query(sql,(err,result)=>{
+                let sql=`INSERT INTO users SET googleid= ?,username=?,email=?,photoUrl= ?`;
+                database.query(sql,[user.id,user.name,user.email,user.photoUrl],(err,result)=>{
                     if(err){
                         throw err;
                     }

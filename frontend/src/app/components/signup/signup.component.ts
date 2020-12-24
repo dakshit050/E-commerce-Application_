@@ -22,13 +22,7 @@ export class SignupComponent implements OnInit {
     private spinner:NgxSpinnerService,
     private authservice:SocialAuthService,
     private router:Router
-  ) { }
-
-  signInWithGoogle(): void {
-    this.authservice.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
-
-  ngOnInit(): void {
+  ) {
     this.registrationForm = this.formBuilder.group({
       username: ['',[Validators.minLength(3),Validators.maxLength(20),Validators.required]],
       email: ['',Validators.required],
@@ -37,13 +31,24 @@ export class SignupComponent implements OnInit {
       confirmpassword:['',Validators.required]
   
     });
+   }
 
+  signInWithGoogle(): void {
+    this.authservice.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  ngOnInit(): void {
+    if(!this.customerService.isLogin){
     this.authservice.authState.subscribe((user)=>{
       this.customerService.GoogleOuth(user).subscribe(data=>{
         this.customerService.SetToken(data['token']);
         this.router.navigate(['cart']);
+        location.reload();
       })
-    })
+    });
+  }else{
+    this.router.navigate(['home']);
+  }
   }
   onSubmit(){
     this.spinner.show();

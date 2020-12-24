@@ -18,7 +18,8 @@ image=environment.Images;
   constructor(public cartService:CartService,
               private customerservice:CustomerService,
               private spinner:NgxSpinnerService,
-              private router:Router) { }
+              private router:Router,
+              private productService:ProductService) { }
 
   ngOnInit(): void {
     this.spinner.show();

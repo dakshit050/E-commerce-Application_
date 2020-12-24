@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -21,8 +23,8 @@
     
     <div class="right">
       <span class="loginwith">Sign in with<br />social network</span>
-      <button class="btn social-signin facebook" [disabled]="!loginForm.valid"  type="submit" >Log in with facebook</button>
-      <button class="btn social-signin twitter" [disabled]="!loginForm.valid" type="submit">Log in with Twitter</button>
+      <button class="btn social-signin facebook" [disabled]="true"  type="submit" >Log in with facebook</button>
+      <button class="btn social-signin twitter" [disabled]="true" type="submit">Log in with Twitter</button>
       <button class="social-signin google" (click)="signInWithGoogle()">Log in with Google</button>
     </div>
     <div class="or">OR</div>
